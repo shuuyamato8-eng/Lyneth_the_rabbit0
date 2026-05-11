@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Secret Fox Room</title>
+  <title>Lyneth VODs Archive</title>
   <style>
     * {
       margin: 0;
@@ -17,9 +17,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #1a1226, #2c1d3d, #10131f);
+      background: linear-gradient(135deg, #eef7ff, #dceeff, #f7fbff);
       overflow: hidden;
-      color: white;
+      color: #18324a;
     }
 
     .glow {
@@ -57,9 +57,9 @@
       padding: 40px;
       border-radius: 28px;
       backdrop-filter: blur(18px);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(120,170,220,0.25);
+      box-shadow: 0 10px 40px rgba(120,170,220,0.18);
       text-align: center;
     }
 
@@ -99,8 +99,8 @@
       cursor: pointer;
       font-size: 1rem;
       font-weight: bold;
-      background: linear-gradient(135deg, #ffb6e6, #d6b3ff);
-      color: #241530;
+      background: linear-gradient(135deg, #9fd4ff, #ffffff, #c8f1d2);
+      color: #23425d;
       transition: 0.25s;
     }
 
@@ -112,7 +112,7 @@
     .message {
       margin-top: 16px;
       font-size: 0.95rem;
-      color: #ffb6c1;
+      color: #d14b5d;
       min-height: 20px;
     }
 
@@ -129,6 +129,57 @@
 
     .secret-page p {
       margin-bottom: 10px;
+      color: #35516d;
+    }
+
+    .vod-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .vod-card {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(130,170,220,0.2);
+      border-left: 6px solid #9fd4ff;
+      border-radius: 18px;
+      padding: 18px;
+      transition: 0.25s;
+    }
+
+    .vod-card:nth-child(2n) {
+      border-left-color: #d14b5d;
+    }
+
+    .vod-card:nth-child(3n) {
+      border-left-color: #9dd8b6;
+    }
+
+    .vod-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(120,170,220,0.12);
+    }
+
+    .vod-card h3 {
+      margin-bottom: 8px;
+      color: #173754;
+    }
+
+    .vod-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #9fd4ff, #ffffff);
+      color: #23425d;
+      font-weight: bold;
+    }
+
+    .vod-card a:hover {
+      opacity: 0.92;
     }
 
     @keyframes fadeIn {
@@ -148,9 +199,9 @@
   <div class="glow"></div>
 
   <div class="card" id="loginBox">
-    <h1>🦊 Secret Fox Room</h1>
+    <h1>🐇 Lyneth VODs Archive</h1>
     <p>
-      This archive is only accessible to supporters.<br>
+      This archive is only accessible to membership.<br>
       Please enter the password.
     </p>
 
@@ -162,13 +213,45 @@
   </div>
 
   <div class="card secret-page" id="secretPage">
-    <h2>✨ Welcome Back</h2>
-    <p>You have unlocked the secret archive.</p>
-    <p>ใส่รูป, lore, gallery หรือ supporter content ตรงนี้ได้เลย</p>
+    <h2>❄️ Welcome to Lyneth's VOD Archive</h2>
+    <p>You have successfully unlocked the membership archive.</p>
+    <p>คลังเก็บคลิปย้อนหลังและช่วงเวลาต่าง ๆ ของ Lyneth ✨</p>
+
+    <div class="vod-list">
+      <div class="vod-card">
+        <h3>🌲 trees hate you</h3>
+        <p>เกมชวนปวดหัวที่ต้นไม้พร้อมเกลียดทุกคน</p>
+        <a href="https://youtu.be/ZHuFTM3Gl1Y" target="_blank">Watch Archive</a>
+      </div>
+
+      <div class="vod-card">
+        <h3>🎮 อยากเล่นเกมตู*</h3>
+        <p>บ่นเกมไป เล่นไป และหลุดขำทั้งไลฟ์</p>
+        <a href="https://youtu.be/4cbNt_XENdk" target="_blank">Watch Archive</a>
+      </div>
+
+      <div class="vod-card">
+        <h3>🧩 มือใหม่ครับ</h3>
+        <p>ช่วงเริ่มต้นกับความวุ่นวายแบบมือใหม่</p>
+        <a href="https://youtu.be/Fdi_bt44zMc" target="_blank">Watch Archive</a>
+      </div>
+
+      <div class="vod-card">
+        <h3>🖋️ มาอวดงานไทโป</h3>
+        <p>รวมงาน typography และพูดคุยสบาย ๆ</p>
+        <a href="https://youtu.be/ZwYn1UOwZGs" target="_blank">Watch Archive</a>
+      </div>
+
+      <div class="vod-card">
+        <h3>🎥 Special Archive</h3>
+        <p>ช่วงเวลาพิเศษจาก membership archive</p>
+        <a href="https://youtu.be/9rizZWwEV2M" target="_blank">Watch Archive</a>
+      </div>
+    </div>
   </div>
 
   <script>
-    const correctPassword = "foxroom";
+    const correctPassword = "snowrabbit-417-mizuyu";
 
     function checkPassword() {
       const input = document.getElementById("password").value;
