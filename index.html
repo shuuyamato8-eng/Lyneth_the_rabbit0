@@ -1,269 +1,334 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lyneth VODs Archive</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lyneth VODs Archive</title>
 
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #eef7ff, #dceeff, #f7fbff);
-      overflow: hidden;
-      color: #18324a;
-    }
+<style>
 
-    .glow {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.03);
-      filter: blur(80px);
-      animation: float 8s infinite ease-in-out;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
 
-    .glow:nth-child(1) {
-      top: -100px;
-      left: -100px;
-    }
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+background:
+linear-gradient(rgba(240,248,255,0.82),rgba(240,248,255,0.82)),
+url("https://images.unsplash.com/photo-1510797215324-95aa89f43c33?q=80&w=1974&auto=format&fit=crop");
+background-size:cover;
+background-position:center;
+overflow-y:auto;
+}
 
-    .glow:nth-child(2) {
-      bottom: -100px;
-      right: -100px;
-      animation-delay: 3s;
-    }
+.container{
+width:100%;
+max-width:900px;
+background:rgba(255,255,255,0.88);
+backdrop-filter:blur(12px);
+border-radius:40px;
+padding:50px;
+box-shadow:0 10px 40px rgba(80,120,170,0.15);
+border:1px solid rgba(255,255,255,0.5);
+text-align:center;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(20px); }
-      100% { transform: translateY(0px); }
-    }
+.title{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:16px;
+font-size:3rem;
+font-weight:800;
+color:#173754;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
 
-    .card {
-      position: relative;
-      z-index: 2;
-      width: 90%;
-      max-width: 420px;
-      padding: 40px;
-      border-radius: 28px;
-      backdrop-filter: blur(18px);
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(120,170,220,0.25);
-      box-shadow: 0 10px 40px rgba(120,170,220,0.18);
-      text-align: center;
-    }
+.title span{
+white-space:nowrap;
+}
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-    }
+.subtitle{
+font-size:1.35rem;
+color:#294866;
+line-height:1.8;
+margin-bottom:35px;
+}
 
-    p {
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
+.subtitle b{
+color:#d8506a;
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      outline: none;
-      background: rgba(255,255,255,0.12);
-      color: white;
-      font-size: 1rem;
-      margin-bottom: 16px;
-    }
+.password-box{
+position:relative;
+max-width:700px;
+margin:auto;
+margin-bottom:30px;
+}
 
-    input::placeholder {
-      color: rgba(255,255,255,0.45);
-    }
+.password-box input{
+width:100%;
+padding:24px 70px 24px 24px;
+font-size:1.3rem;
+border-radius:24px;
+border:3px solid #90c7ff;
+background:white;
+outline:none;
+color:#23425d;
+box-shadow:0 5px 15px rgba(120,170,220,0.1);
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      background: linear-gradient(135deg, #9fd4ff, #ffffff, #c8f1d2);
-      color: #23425d;
-      transition: 0.25s;
-    }
+.password-box input::placeholder{
+color:#8ea3b7;
+}
 
-    button:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
+.eye-btn{
+position:absolute;
+right:20px;
+top:50%;
+transform:translateY(-50%);
+background:none;
+border:none;
+font-size:1.5rem;
+cursor:pointer;
+}
 
-    .message {
-      margin-top: 16px;
-      font-size: 0.95rem;
-      color: #d14b5d;
-      min-height: 20px;
-    }
+.enter-btn{
+width:100%;
+max-width:700px;
+padding:22px;
+border:none;
+border-radius:28px;
+font-size:1.5rem;
+font-weight:700;
+cursor:pointer;
+background:linear-gradient(90deg,#9ecfff,#c8f1d2);
+color:#173754;
+box-shadow:0 8px 20px rgba(120,170,220,0.15);
+transition:.25s;
+}
 
-    .secret-page {
-      display: none;
-      text-align: center;
-      animation: fadeIn 0.5s ease;
-    }
+.enter-btn:hover{
+transform:translateY(-2px);
+}
 
-    .secret-page h2 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
+.secret-page{
+display:none;
+margin-top:40px;
+text-align:left;
+}
 
-    .secret-page p {
-      margin-bottom: 10px;
-      color: #35516d;
-    }
+.secret-page h2{
+text-align:center;
+font-size:2.3rem;
+margin-bottom:14px;
+color:#173754;
+}
 
-    .vod-list {
-      margin-top: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      text-align: left;
-    }
+.secret-page p{
+text-align:center;
+font-size:1.1rem;
+color:#35516d;
+margin-bottom:30px;
+}
 
-    .vod-card {
-      background: rgba(255,255,255,0.78);
-      border: 1px solid rgba(130,170,220,0.2);
-      border-left: 6px solid #9fd4ff;
-      border-radius: 18px;
-      padding: 18px;
-      transition: 0.25s;
-    }
+.vod-list{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
 
-    .vod-card:nth-child(2n) {
-      border-left-color: #d14b5d;
-    }
+.vod-card{
+background:white;
+border-radius:22px;
+padding:24px;
+border-left:8px solid #9ecfff;
+box-shadow:0 5px 15px rgba(120,170,220,0.08);
+}
 
-    .vod-card:nth-child(3n) {
-      border-left-color: #9dd8b6;
-    }
+.vod-card:nth-child(2n){
+border-left-color:#d8506a;
+}
 
-    .vod-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(120,170,220,0.12);
-    }
+.vod-card:nth-child(3n){
+border-left-color:#8dd8aa;
+}
 
-    .vod-card h3 {
-      margin-bottom: 8px;
-      color: #173754;
-    }
+.vod-card h3{
+font-size:1.5rem;
+margin-bottom:10px;
+color:#173754;
+}
 
-    .vod-card a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      text-decoration: none;
-      background: linear-gradient(135deg, #9fd4ff, #ffffff);
-      color: #23425d;
-      font-weight: bold;
-    }
+.vod-card p{
+text-align:left;
+margin-bottom:16px;
+}
 
-    .vod-card a:hover {
-      opacity: 0.92;
-    }
+.vod-card a{
+display:inline-block;
+padding:12px 18px;
+border-radius:14px;
+background:linear-gradient(90deg,#9ecfff,#d6f0dd);
+text-decoration:none;
+font-weight:700;
+color:#173754;
+}
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+.footer-text{
+margin-top:35px;
+font-size:1rem;
+color:#6c87a1;
+}
+
+@media(max-width:768px){
+
+.container{
+padding:35px 22px;
+}
+
+.title{
+font-size:2rem;
+}
+
+.subtitle{
+font-size:1rem;
+}
+
+.password-box input{
+font-size:1rem;
+padding:18px 60px 18px 18px;
+}
+
+.enter-btn{
+font-size:1.1rem;
+padding:18px;
+}
+
+}
+
+</style>
 </head>
+
 <body>
-  <div class="glow"></div>
-  <div class="glow"></div>
 
-  <div class="card" id="loginBox">
-    <h1>🐇 Lyneth VODs Archive</h1>
-    <p>
-      This archive is only accessible to membership.<br>
-      Please enter the password.
-    </p>
+<div class="container">
 
-    <input type="password" id="password" placeholder="Enter password..." />
+<div class="title">
+🐇 <span>Lyneth VODs Archive</span>
+</div>
 
-    <button onclick="checkPassword()">Enter Archive</button>
+<div class="subtitle">
+This archive is only accessible to <b>membership</b>.<br>
+Please enter the password.
+</div>
 
-    <div class="message" id="message"></div>
-  </div>
+<div id="loginPage">
 
-  <div class="card secret-page" id="secretPage">
-    <h2>❄️ Welcome to Lyneth's VOD Archive</h2>
-    <p>You have successfully unlocked the membership archive.</p>
-    <p>คลังเก็บคลิปย้อนหลังและช่วงเวลาต่าง ๆ ของ Lyneth ✨</p>
+<div class="password-box">
+<input type="password" id="password" placeholder="Enter password">
+<button class="eye-btn" onclick="togglePassword()">👁️</button>
+</div>
 
-    <div class="vod-list">
-      <div class="vod-card">
-        <h3>🌲 trees hate you</h3>
-        <p>เกมชวนปวดหัวที่ต้นไม้พร้อมเกลียดทุกคน</p>
-        <a href="https://youtu.be/ZHuFTM3Gl1Y" target="_blank">Watch Archive</a>
-      </div>
+<button class="enter-btn" onclick="checkPassword()">
+❄️ Enter Archive ❄️
+</button>
 
-      <div class="vod-card">
-        <h3>🎮 อยากเล่นเกมตู*</h3>
-        <p>บ่นเกมไป เล่นไป และหลุดขำทั้งไลฟ์</p>
-        <a href="https://youtu.be/4cbNt_XENdk" target="_blank">Watch Archive</a>
-      </div>
+</div>
 
-      <div class="vod-card">
-        <h3>🧩 มือใหม่ครับ</h3>
-        <p>ช่วงเริ่มต้นกับความวุ่นวายแบบมือใหม่</p>
-        <a href="https://youtu.be/Fdi_bt44zMc" target="_blank">Watch Archive</a>
-      </div>
+<div class="secret-page" id="secretPage">
 
-      <div class="vod-card">
-        <h3>🖋️ มาอวดงานไทโป</h3>
-        <p>รวมงาน typography และพูดคุยสบาย ๆ</p>
-        <a href="https://youtu.be/ZwYn1UOwZGs" target="_blank">Watch Archive</a>
-      </div>
+<h2>❄️ Welcome to Lyneth's VOD Archive</h2>
 
-      <div class="vod-card">
-        <h3>🎥 Special Archive</h3>
-        <p>ช่วงเวลาพิเศษจาก membership archive</p>
-        <a href="https://youtu.be/9rizZWwEV2M" target="_blank">Watch Archive</a>
-      </div>
-    </div>
-  </div>
+<p>
+You have successfully unlocked the membership archive.<br>
+คลังเก็บคลิปย้อนหลังและช่วงเวลาต่าง ๆ ของ Lyneth ✨
+</p>
 
-  <script>
-    const correctPassword = "snowrabbit-417-mizuyu";
+<div class="vod-list">
 
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      const message = document.getElementById("message");
+<div class="vod-card">
+<h3>🌲 trees hate you</h3>
+<p>เกมชวนปวดหัวที่ต้นไม้พร้อมเกลียดทุกคน</p>
+<a href="https://youtu.be/ZHuFTM3Gl1Y" target="_blank">Watch Archive</a>
+</div>
 
-      if (input === correctPassword) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("secretPage").style.display = "block";
-      } else {
-        message.textContent = "Wrong password";
-      }
-    }
-  </script>
+<div class="vod-card">
+<h3>🎮 อยากเล่นเกมตู*</h3>
+<p>บ่นเกมไป เล่นไป และหลุดขำทั้งไลฟ์</p>
+<a href="https://youtu.be/4cbNt_XENdk" target="_blank">Watch Archive</a>
+</div>
+
+<div class="vod-card">
+<h3>🧩 มือใหม่ครับ</h3>
+<p>ช่วงเริ่มต้นกับความวุ่นวายแบบมือใหม่</p>
+<a href="https://youtu.be/Fdi_bt44zMc" target="_blank">Watch Archive</a>
+</div>
+
+<div class="vod-card">
+<h3>🖋️ มาอวดงานไทโป</h3>
+<p>รวมงาน typography และพูดคุยสบาย ๆ</p>
+<a href="https://youtu.be/ZwYn1UOwZGs" target="_blank">Watch Archive</a>
+</div>
+
+<div class="vod-card">
+<h3>🔮 chef's shift & meowgic</h3>
+<p>เป็นเชฟมือหนึ่งและนักเวทเหมียว</p>
+<a href="https://youtu.be/9rizZWwEV2M" target="_blank">Watch Archive</a>
+</div>
+
+</div>
+
+<div class="footer-text">
+雪の中で、君だけの秘密を開こう。
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const correctPassword = "snowrabbit-417-mizuyu";
+
+function togglePassword(){
+
+const passwordInput=document.getElementById("password");
+
+if(passwordInput.type==="password"){
+passwordInput.type="text";
+}else{
+passwordInput.type="password";
+}
+
+}
+
+function checkPassword(){
+
+const input=document.getElementById("password").value;
+
+if(input===correctPassword){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("secretPage").style.display="block";
+
+}else{
+
+alert("Wrong password");
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
