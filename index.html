@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secret Fox Room</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1226, #2c1d3d, #10131f);
+      overflow: hidden;
+      color: white;
+    }
+
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      filter: blur(80px);
+      animation: float 8s infinite ease-in-out;
+    }
+
+    .glow:nth-child(1) {
+      top: -100px;
+      left: -100px;
+    }
+
+    .glow:nth-child(2) {
+      bottom: -100px;
+      right: -100px;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 420px;
+      padding: 40px;
+      border-radius: 28px;
+      backdrop-filter: blur(18px);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.45);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ffb6e6, #d6b3ff);
+      color: #241530;
+      transition: 0.25s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .message {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: #ffb6c1;
+      min-height: 20px;
+    }
+
+    .secret-page {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .secret-page h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .secret-page p {
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="glow"></div>
+
+  <div class="card" id="loginBox">
+    <h1>🦊 Secret Fox Room</h1>
+    <p>
+      This archive is only accessible to supporters.<br>
+      Please enter the password.
+    </p>
+
+    <input type="password" id="password" placeholder="Enter password..." />
+
+    <button onclick="checkPassword()">Enter Archive</button>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <div class="card secret-page" id="secretPage">
+    <h2>✨ Welcome Back</h2>
+    <p>You have unlocked the secret archive.</p>
+    <p>ใส่รูป, lore, gallery หรือ supporter content ตรงนี้ได้เลย</p>
+  </div>
+
+  <script>
+    const correctPassword = "foxroom";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      const message = document.getElementById("message");
+
+      if (input === correctPassword) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("secretPage").style.display = "block";
+      } else {
+        message.textContent = "Wrong password";
+      }
+    }
+  </script>
+</body>
+</html>
